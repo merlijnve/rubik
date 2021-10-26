@@ -123,7 +123,6 @@ func astar(cube Cube, checker func(cube Cube) bool, heur func(cube Cube) int, ge
 	for true {
 		node_current, priorityQueue = move_lowest_to_closed(open, closed, &node_start, priorityQueue)
 		if checker(node_current.cube) {
-			print_solution(node_current.cube)
 			return node_current.cube
 		} else {
 			successors := get_successors(node_current, get_moves, heur(node_current.cube))

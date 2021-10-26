@@ -28,13 +28,10 @@ func top_layer_check(cube Cube) bool {
 		!strings.Contains(get_corner_value(cube.pattern, "URB"), "B") {
 		return false
 	}
-	corner_value := get_corner_value(cube.pattern, "UFL")
 	if !strings.Contains(get_corner_value(cube.pattern, "UFL"), "L") ||
 		!strings.Contains(get_corner_value(cube.pattern, "UFL"), "F") {
 		return false
 	}
-	corner_value = get_corner_value(cube.pattern, "UFL")
-	print(corner_value)
 	if !strings.Contains(get_corner_value(cube.pattern, "ULB"), "L") ||
 		!strings.Contains(get_corner_value(cube.pattern, "ULB"), "B") {
 		return false
