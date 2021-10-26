@@ -88,7 +88,7 @@ func bottom_cross_get_moves(cube Cube) []Cube {
 
 	for i := range sequences {
 		temp := copy(cube)
-		sequence(temp, sequences[i])
+		temp = sequence(temp, sequences[i])
 		moves = append(moves, temp)
 	}
 	return moves

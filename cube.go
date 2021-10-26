@@ -69,7 +69,19 @@ func move_is_legal(move string) bool {
 }
 
 func copy(cube Cube) Cube {
-	return Cube{cube.pattern, cube.solution, cube.optimal_solution}
+	new_cube := Cube{make([]string, 0, 0), make([]string, 0, 0), make([]string, 0, 0)}
+
+	for i := range cube.pattern {
+		new_cube.pattern = append(new_cube.pattern, cube.pattern[i])
+	}
+	for i := range cube.solution {
+		new_cube.solution = append(new_cube.solution, cube.solution[i])
+	}
+	for i := range cube.optimal_solution {
+		new_cube.optimal_solution = append(new_cube.optimal_solution, cube.optimal_solution[i])
+	}
+
+	return new_cube
 }
 
 func get_corner_value(pattern []string, corner_key string) string {

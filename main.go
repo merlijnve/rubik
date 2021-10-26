@@ -54,12 +54,12 @@ func validate(seq string) {
 func rubik(seq string) {
 	validate(seq)
 	cube := init_cube()
-	fmt.Println(cube.pattern)
 	cube = sequence(cube, seq)
-	fmt.Println(cube.pattern)
 
 	cube = astar(cube, bottom_cross_check, bottom_cross_heuristic, bottom_cross_get_moves)
 	cube = astar(cube, first_layer_check, first_layer_heuristic, first_layer_get_moves)
+	cube = astar(cube, second_layer_check, second_layer_heuristic, second_layer_get_moves)
+	cube = astar(cube, top_layer_check, top_layer_heuristic, top_layer_get_moves)
 }
 
 func main() {
