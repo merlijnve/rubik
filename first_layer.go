@@ -49,21 +49,25 @@ func first_layer_get_moves(cube Cube) []Cube {
 	sequences = append(sequences, "F' U' F U")
 
 	if sorted(get_corner_value(cube.pattern, "UFL")) == "DFL" {
+		sequences = nil
 		sequences = append(sequences, "L' U' L")
 		sequences = append(sequences, "F U F'")
 		sequences = append(sequences, "F R U' U' R' F'")
 	}
 	if sorted(get_corner_value(cube.pattern, "ULB")) == "BDL" {
+		sequences = nil
 		sequences = append(sequences, "B' U' B")
 		sequences = append(sequences, "L U L'")
 		sequences = append(sequences, "L F U' U' F' L'")
 	}
 	if sorted(get_corner_value(cube.pattern, "URB")) == "BDR" {
+		sequences = nil
 		sequences = append(sequences, "R' U' R")
 		sequences = append(sequences, "B U B'")
 		sequences = append(sequences, "B L U' U' L' B'")
 	}
 	if sorted(get_corner_value(cube.pattern, "URF")) == "DFR" {
+		sequences = nil
 		sequences = append(sequences, "F' U' F")
 		sequences = append(sequences, "R U R'")
 		sequences = append(sequences, "R B U' U' B' R'")
