@@ -384,42 +384,6 @@ func print_cube_color(cube Cube) {
 	fmt.Println()
 }
 
-// def print_cubemap(self):
-//         colors = {'U': 7,
-//                   'R': 1,
-//                   'F': 2,
-//                   'D': 3,
-//                   'L': 4,
-//                   'B': 6
-//                   }
-
-//         print('\n')
-//         for row in range(0, 3):
-//             for col in range(0, 3):
-//                 print("     ", end='')
-//             for col in range(0, 3):
-//                 piece = self.pattern[row*3+col]
-//                 print("%s%s [%s] %s" % (fg(colors[piece]),
-//                                         bg(0), piece, attr('reset')), end='')
-//             print('\n')
-//         for row in range(0, 3):
-//             for face in [4, 2, 1, 5]:
-//                 for col in range(0, 3):
-//                     piece = self.pattern[face*3 *
-//                                          3+row*3+col]
-//                     print("%s%s [%s] %s" % (fg(colors[piece]),
-//                           bg(0), piece, attr('reset')), end='')
-//             print('\n')
-//         for row in range(0, 3):
-//             for col in range(0, 3):
-//                 print("     ", end='')
-//             for col in range(0, 3):
-//                 piece = self.pattern[9 *
-//                                      3+row*3+col]
-//                 print("%s%s [%s] %s" % (fg(colors[piece]),
-//                                         bg(0), piece, attr('reset')), end='')
-//             print('\n')
-
 func print_cube_map(cube Cube) {
 	colors := map[string]string{
 		"U": "\033[1;37m",
