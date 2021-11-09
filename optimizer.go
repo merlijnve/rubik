@@ -1,18 +1,19 @@
 package main
 
-import "strings"
+import (
+	"strings"
+)
 
 func remove_move_and_inversion(cube Cube) Cube {
 	solution_len := len(cube.solution)
 	i := 0
-
 	for i < solution_len {
-		if solution_len-i >= 2 && strings.Contains(cube.solution[i+1], "'") && strings.Contains(cube.solution[i], "'") && cube.solution[i][0] == cube.solution[i+1][0] {
+		if solution_len-i >= 2 && strings.Contains(cube.solution[i+1], "'") && !strings.Contains(cube.solution[i], "'") && cube.solution[i][0] == cube.solution[i+1][0] {
 			cube.solution = append(cube.solution[0:i], cube.solution[i+2:solution_len]...)
 			i = 0
-			} else if solution_len-i >= 2 && strings.Contains(cube.solution[i], "'") && strings.Contains(cube.solution[i+1], "'") && cube.solution[i][0] == cube.solution[i+1][0] {
-				cube.solution = append(cube.solution[0:i], cube.solution[i+2:solution_len]...)
-				i = 0
+		} else if solution_len-i >= 2 && strings.Contains(cube.solution[i], "'") && !strings.Contains(cube.solution[i+1], "'") && cube.solution[i][0] == cube.solution[i+1][0] {
+			cube.solution = append(cube.solution[0:i], cube.solution[i+2:solution_len]...)
+			i = 0
 		} else {
 			i += 1
 		}

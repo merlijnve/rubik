@@ -24,8 +24,10 @@ func check(err error) {
 
 func print_solution(cube Cube) {
 	for i := range cube.solution {
-		print(cube.solution[i] + "\n")
+		print(cube.solution[i] + " ")
+
 	}
+	println()
 }
 
 func init_cube() Cube {
@@ -53,7 +55,7 @@ func validate(seq string) {
 func generate_test_sequence() string {
 
 	moves := []string{"U", "D", "R", "L", "F", "B", "U2", "D2", "R2", "L2", "F2", "B2", "U'", "D'", "R'", "L'", "F'", "B'"}
-	length := rand.Intn(100) + 1
+	length := rand.Intn(19) + 1
 
 	move := moves[rand.Intn(len(moves))]
 
@@ -130,7 +132,7 @@ func test() {
 		cube.solution = nil
 		println(i, sequence_length)
 		println(test_sequences[i])
-		// print_cube_map(cube)
+		print_cube_map(cube)
 
 		// fmt.Println("DOING:", test_sequences[i])
 		// print_cube_map(cube)
@@ -212,6 +214,13 @@ func rubik(seq string) {
 	fmt.Println("TOP LAYER")
 	print_cube_map(cube)
 	cube = astar(cube, top_layer_check, top_layer_heuristic, top_layer_get_moves)
+	for i := 0; i < 4; i++ {
+		for cube.pattern[8] != "U" {
+			cube = sequence(cube, "R' D' R D")
+		}
+		cube = sequence(cube, "U")
+	}
+	print_cube_map(cube)
 	cube = optimize(cube)
 	print_solution(cube)
 	fmt.Println(len(cube.solution))

@@ -39,13 +39,13 @@ func second_layer_get_moves(cube Cube) []Cube {
 
 	if len(sequences) == 0 {
 		if get_edge_value(cube.pattern, "RF") == "FR" {
-			sequences = append(sequences, "U R U' R' U' F' U F U2 U R U' R' U' F' U F")
+			sequences = append(sequences, "U R U' R' U' F' U F U U U R U' R' U' F' U F")
 		} else if get_edge_value(cube.pattern, "RB") == "BR" {
-			sequences = append(sequences, "U B U' B' U' R' U R U2 U B U' B' U' R' U R")
+			sequences = append(sequences, "U B U' B' U' R' U R U U U B U' B' U' R' U R")
 		} else if get_edge_value(cube.pattern, "LB") == "BL" {
-			sequences = append(sequences, "U L U' L' U' B' U B U2 U L U' L' U' B' U B")
+			sequences = append(sequences, "U L U' L' U' B' U B U U U L U' L' U' B' U B")
 		} else if get_edge_value(cube.pattern, "FL") == "LF" {
-			sequences = append(sequences, "U F U' F' U' L' U L U2 U F U' F' U' L' U L")
+			sequences = append(sequences, "U F U' F' U' L' U L U U U F U' F' U' L' U L")
 		} else if get_edge_value(cube.pattern, "RF") != "RF" {
 			sequences = append(sequences, "U R U' R' U' F' U F")
 			sequences = append(sequences, "U' F' U F U R U' R'")

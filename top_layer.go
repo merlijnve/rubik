@@ -36,12 +36,7 @@ func top_layer_check(cube Cube) bool {
 		!strings.Contains(get_corner_value(cube.pattern, "ULB"), "B") {
 		return false
 	}
-	for i := 0; i < 4; i++ {
-		for cube.pattern[8] != "U" {
-			sequence(cube, "R' D' R D")
-		}
-		sequence(cube, "U")
-	}
+
 	return true
 }
 
