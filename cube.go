@@ -1,6 +1,9 @@
 package main
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 func edges() (func(key string) []int, func() map[string][]int) {
 	edges := map[string][]int{
@@ -350,4 +353,124 @@ func sequence(cube Cube, seq string) Cube {
 		cube.solution = append(cube.solution, sequence[i])
 	}
 	return cube
+}
+
+func print_cube(cube Cube) {
+	for i := 0; i < 54; i++ {
+		if i%3 == 0 {
+			fmt.Println()
+		}
+		fmt.Printf("[%s] ", cube.pattern[i])
+	}
+	fmt.Println()
+}
+
+func print_cube_color(cube Cube) {
+	pattern_color := map[string]string{
+		"U": "\033[1;37m",
+		"D": "\033[1;33m",
+		"B": "\033[1;31m",
+		"L": "\033[1;34m",
+		"F": "\033[1;32m",
+		"R": "\033[1;35m",
+		"C": "\033[0m",
+	}
+	for i := 0; i < 54; i++ {
+		if i%3 == 0 {
+			fmt.Println()
+		}
+		fmt.Printf("%s[%s] %s", pattern_color[cube.pattern[i]], cube.pattern[i], pattern_color["C"])
+	}
+	fmt.Println()
+}
+
+// def print_cubemap(self):
+//         colors = {'U': 7,
+//                   'R': 1,
+//                   'F': 2,
+//                   'D': 3,
+//                   'L': 4,
+//                   'B': 6
+//                   }
+
+//         print('\n')
+//         for row in range(0, 3):
+//             for col in range(0, 3):
+//                 print("     ", end='')
+//             for col in range(0, 3):
+//                 piece = self.pattern[row*3+col]
+//                 print("%s%s [%s] %s" % (fg(colors[piece]),
+//                                         bg(0), piece, attr('reset')), end='')
+//             print('\n')
+//         for row in range(0, 3):
+//             for face in [4, 2, 1, 5]:
+//                 for col in range(0, 3):
+//                     piece = self.pattern[face*3 *
+//                                          3+row*3+col]
+//                     print("%s%s [%s] %s" % (fg(colors[piece]),
+//                           bg(0), piece, attr('reset')), end='')
+//             print('\n')
+//         for row in range(0, 3):
+//             for col in range(0, 3):
+//                 print("     ", end='')
+//             for col in range(0, 3):
+//                 piece = self.pattern[9 *
+//                                      3+row*3+col]
+//                 print("%s%s [%s] %s" % (fg(colors[piece]),
+//                                         bg(0), piece, attr('reset')), end='')
+//             print('\n')
+
+func print_cube_map(cube Cube) {
+	colors := map[string]string{
+		"U": "\033[1;37m",
+		"D": "\033[1;33m",
+		"B": "\033[1;31m",
+		"L": "\033[1;34m",
+		"F": "\033[1;32m",
+		"R": "\033[1;35m",
+		"C": "\033[0m",
+	}
+	for row := 0; row < 3; row++ {
+		for col := 0; col < 3; col++ {
+			fmt.Printf("     ")
+		}
+		for col := 0; col < 3; col++ {
+			fmt.Printf("%s [%s] %s", colors[cube.pattern[row*3+col]], cube.pattern[row*3+col], colors["C"])
+		}
+		fmt.Println()
+	}
+	for row := 0; row < 3; row++ {
+		//[4, 2, 1, 5]
+		faces := map[int]int{
+			0: 4,
+			1: 2,
+			2: 1,
+			3: 5,
+		}
+		for index := 0; index <= 3; index++ {
+			face := faces[index]
+			for col := 0; col < 3; col++ {
+				fmt.Printf("%s [%s] %s", colors[cube.pattern[face*3*3+row*3+col]], cube.pattern[face*3*3+row*3+col], colors["C"])
+			}
+		}
+		fmt.Println()
+	}
+	for row := 0; row < 3; row++ {
+		for col := 0; col < 3; col++ {
+			fmt.Printf("     ")
+		}
+		for col := 0; col < 3; col++ {
+			fmt.Printf("%s [%s] %s", colors[cube.pattern[9*3+row*3+col]], cube.pattern[9*3+row*3+col], colors["C"])
+		}
+		fmt.Println()
+	}
+	fmt.Println()
+}
+
+func pattern_to_string(cube Cube) string {
+	var result string
+	for i := 0; i < 54; i++ {
+		result += cube.pattern[i]
+	}
+	return result
 }

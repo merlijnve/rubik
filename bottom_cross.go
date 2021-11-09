@@ -126,16 +126,16 @@ func fix_edges_bottom_cross(cube Cube) Cube {
 }
 
 func bottom_cross_check(cube Cube) bool {
-	if get_edge_value(cube.pattern, "RD") != "RD" && get_edge_value(cube.pattern, "RD") != "DR" {
+	if get_edge_value(cube.pattern, "RD") != "RD" {
 		return false
 	}
-	if get_edge_value(cube.pattern, "FD") != "FD" && get_edge_value(cube.pattern, "FD") != "DF" {
+	if get_edge_value(cube.pattern, "FD") != "FD" {
 		return false
 	}
-	if get_edge_value(cube.pattern, "DL") != "DL" && get_edge_value(cube.pattern, "DL") != "LD" {
+	if get_edge_value(cube.pattern, "DL") != "DL" {
 		return false
 	}
-	if get_edge_value(cube.pattern, "DB") != "DB" && get_edge_value(cube.pattern, "DB") != "BD" {
+	if get_edge_value(cube.pattern, "DB") != "DB" {
 		return false
 	}
 	return true
