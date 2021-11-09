@@ -4,31 +4,40 @@ func second_layer_get_moves(cube Cube) []Cube {
 	moves := make([]Cube, 0)
 	sequences := make([]string, 0)
 
-	sequences = append(sequences, "U R U' R' U' F' U F")
-	sequences = append(sequences, "U")
-	sequences = append(sequences, "U'")
+	// 0 1 2
+	// 3 4 5
+	// 6 7 8
 
-	if cube.pattern[19] == "F" {
-		sequences = nil
+	if cube.pattern[19] == "F" && cube.pattern[7] != "U" {
+		// sequences = nil
 		sequences = append(sequences, "U R U' R' U' F' U F")
 		sequences = append(sequences, "U' L' U L U F U' F'")
 	}
-	if cube.pattern[19] == "R" {
-		sequences = nil
+	if cube.pattern[10] == "R" && cube.pattern[5] != "U" {
+		// sequences = nil
 		sequences = append(sequences, "U B U' B' U' R' U R")
 		sequences = append(sequences, "U' F' U F U R U' R'")
 	}
-	if cube.pattern[19] == "B" {
-		sequences = nil
+	if cube.pattern[46] == "B" && cube.pattern[1] != "U" {
+		// sequences = nil
 		sequences = append(sequences, "U L U' L' U' B' U B")
 		sequences = append(sequences, "U' R' U R U B U' B'")
 	}
-	if cube.pattern[19] == "L" {
-		sequences = nil
+	if cube.pattern[37] == "L" && cube.pattern[3] != "U" {
+		// sequences = nil
 		sequences = append(sequences, "U F U' F' U' L' U L")
 		sequences = append(sequences, "U' B' U B U L U' L'")
 	}
-	
+
+	if len(sequences) == 0 {
+		sequences = append(sequences, "U R U' R' U' F' U F U2 U R U' R' U' F' U F")
+		sequences = append(sequences, "U B U' B' U' R' U R U2 U B U' B' U' R' U R")
+		sequences = append(sequences, "U L U' L' U' B' U B U2 U L U' L' U' B' U B")
+		sequences = append(sequences, "U F U' F' U' L' U L U2 U F U' F' U' L' U L")
+		sequences = append(sequences, "U")
+		sequences = append(sequences, "U'")
+	}
+
 	for i := range sequences {
 		temp := copy(cube)
 		temp = sequence(temp, sequences[i])

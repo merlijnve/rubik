@@ -35,54 +35,70 @@ func bottom_cross_get_moves(cube Cube) []Cube {
 	sequences = append(sequences, "B'")
 
 	if get_edge_value(cube.pattern, "FD") == "DF" {
+		sequences = nil
 		sequences = append(sequences, "F D' L D")
 	}
 	if get_edge_value(cube.pattern, "DL") == "LD" {
+		sequences = nil
 		sequences = append(sequences, "L D' B D")
 	}
 	if get_edge_value(cube.pattern, "DB") == "DB" {
+		sequences = nil
 		sequences = append(sequences, "B D' R D")
 	}
 	if get_edge_value(cube.pattern, "RD") == "DR" {
+		sequences = nil
 		sequences = append(sequences, "R D' F D")
 	}
 
 	if get_edge_value(cube.pattern, "UF") == "FD" {
+		sequences = nil
 		sequences = append(sequences, "F' D' L D")
 	}
 	if get_edge_value(cube.pattern, "UL") == "LD" {
+		sequences = nil
 		sequences = append(sequences, "L' D' B D")
 	}
 	if get_edge_value(cube.pattern, "UB") == "BD" {
+		sequences = nil
 		sequences = append(sequences, "B' D' R D")
 	}
 	if get_edge_value(cube.pattern, "UR") == "RD" {
+		sequences = nil
 		sequences = append(sequences, "R' D' F D")
 	}
 
 	if get_edge_value(cube.pattern, "FL") == "DF" {
+		sequences = nil
 		sequences = append(sequences, "D' L D")
 	}
 	if get_edge_value(cube.pattern, "RF") == "DR" {
+		sequences = nil
 		sequences = append(sequences, "D' F D")
 	}
 	if get_edge_value(cube.pattern, "RB") == "BD" {
+		sequences = nil
 		sequences = append(sequences, "D' R D")
 	}
 	if get_edge_value(cube.pattern, "LB") == "DL" {
+		sequences = nil
 		sequences = append(sequences, "D' B D")
 	}
 
 	if get_edge_value(cube.pattern, "RF") == "FD" {
+		sequences = nil
 		sequences = append(sequences, "D R' D'")
 	}
 	if get_edge_value(cube.pattern, "RB") == "DR" {
+		sequences = nil
 		sequences = append(sequences, "D B' D'")
 	}
 	if get_edge_value(cube.pattern, "LB") == "BD" {
+		sequences = nil
 		sequences = append(sequences, "D L' D'")
 	}
 	if get_edge_value(cube.pattern, "FL") == "LD" {
+		sequences = nil
 		sequences = append(sequences, "D F' D'")
 	}
 

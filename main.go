@@ -97,31 +97,44 @@ func test() {
 
 		// fmt.Println("DOING:", test_sequences[i])
 		// print_cube_map(cube)
-		// fmt.Println("BOTTOM CROSS")
 		cube = astar(cube, bottom_cross_check, bottom_cross_heuristic, bottom_cross_get_moves)
+		fmt.Println("BOTTOM CROSS", len(cube.solution))
+		old_solution_lenght := len(cube.solution)
 		// print(len(cube.solution), " SOLUTION: ")
 		// print_cube_map(cube)
 		// print_solution(cube)
-		// fmt.Println("FIRST LAYER")
 		cube = astar(cube, first_layer_check, first_layer_heuristic, first_layer_get_moves)
+		fmt.Println("FIRST LAYER", len(cube.solution)-old_solution_lenght)
+		old_solution_lenght = len(cube.solution)
+
 		// print(len(cube.solution), " SOLUTION: ")
 		// print_cube_map(cube)
 		// print_solution(cube)
-		// fmt.Println("SECOND LAYER")
 		cube = astar(cube, second_layer_check, second_layer_heuristic, second_layer_get_moves)
+		fmt.Println("SECOND LAYER", len(cube.solution)-old_solution_lenght)
+		old_solution_lenght = len(cube.solution)
+
 		// print(len(cube.solution), " SOLUTION: ")
 		// print_cube_map(cube)
 		// print_solution(cube)
-		// fmt.Println("TOP CROSS")
 		cube = astar(cube, top_cross_check, top_cross_heuristic, top_cross_get_moves)
+		fmt.Println("TOP CROSS", len(cube.solution)-old_solution_lenght)
+		old_solution_lenght = len(cube.solution)
+
 		// print(len(cube.solution), " SOLUTION: ")
 		// print_cube_map(cube)
 		// print_solution(cube)
-		// fmt.Println("TOP LAYER")
 		cube = astar(cube, top_layer_check, top_layer_heuristic, top_layer_get_moves)
+		fmt.Println("TOP LAYER", len(cube.solution)-old_solution_lenght)
 		cube = optimize(cube)
 		// print_cube_map(cube)
-		println(len(cube.solution))
+
+		color := "\033[1;32m"
+		if len(cube.solution) > 150 {
+			color = "\033[1;31m"
+		}
+		fmt.Printf("%s%d%s", color, len(cube.solution), "\033[0m")
+		println()
 		// print_solution(cube)
 	}
 }
