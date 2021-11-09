@@ -33,29 +33,6 @@ func bottom_cross_get_moves(cube Cube) []Cube {
 	sequences = append(sequences, "F'")
 	sequences = append(sequences, "B")
 	sequences = append(sequences, "B'")
-	// sequences = append(sequences, "U2")
-	// sequences = append(sequences, "D2")
-	// sequences = append(sequences, "R2")
-	// sequences = append(sequences, "L2")
-	// sequences = append(sequences, "F2")
-	// sequences = append(sequences, "B2")
-
-	// sequences = append(sequences, "F D' L D")
-	// sequences = append(sequences, "L D' B D")
-	// sequences = append(sequences, "B D' R D")
-	// sequences = append(sequences, "R D' F D")
-	// sequences = append(sequences, "F' D' L D")
-	// sequences = append(sequences, "L' D' B D")
-	// sequences = append(sequences, "B' D' R D")
-	// sequences = append(sequences, "R' D' F D")
-	// sequences = append(sequences, "D' L D")
-	// sequences = append(sequences, "D' F D")
-	// sequences = append(sequences, "D' R D")
-	// sequences = append(sequences, "D' B D")
-	// sequences = append(sequences, "D R' D'")
-	// sequences = append(sequences, "D B' D'")
-	// sequences = append(sequences, "D L' D'")
-	// sequences = append(sequences, "D F' D'")
 
 	if get_edge_value(cube.pattern, "FD") == "DF" {
 		sequences = nil
@@ -186,37 +163,6 @@ func bottom_cross_get_moves(cube Cube) []Cube {
 		moves = append(moves, temp)
 	}
 	return moves
-}
-
-func fix_edges_bottom_cross(cube Cube) Cube {
-	state := cube.pattern
-	if state[1] == "D" {
-		sequence(cube, "B' B'")
-	}
-	if state[3] == "D" {
-		sequence(cube, "L' L'")
-	}
-	if state[5] == "D" {
-		sequence(cube, "R' R'")
-	}
-	if state[7] == "D" {
-		sequence(cube, "F' R'")
-	}
-
-	state = cube.pattern
-	if state[28] != "D" {
-		sequence(cube, "F D' L D")
-	}
-	if state[30] != "D" {
-		sequence(cube, "L D' B D")
-	}
-	if state[32] != "D" {
-		sequence(cube, "R D' F D")
-	}
-	if state[34] != "D" {
-		sequence(cube, "B D' R D")
-	}
-	return cube
 }
 
 func bottom_cross_check(cube Cube) bool {

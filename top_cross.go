@@ -1,9 +1,5 @@
 package main
 
-// import (
-// 	"fmt"
-// )
-
 func top_cross_get_moves(cube Cube) []Cube {
 	moves := make([]Cube, 0)
 	sequences := make([]string, 0)
@@ -16,7 +12,6 @@ func top_cross_get_moves(cube Cube) []Cube {
 	sequences = append(sequences, "U L U L' U L U' U' L' U")
 	sequences = append(sequences, "U F U F' U F U' U' F' U")
 
-	// fmt.Println(cube.pattern[1],cube.pattern[3],cube.pattern[5],cube.pattern[7])
 	if cube.pattern[3] == "U" && cube.pattern[7] != "U" {
 		sequences = nil
 		sequences = append(sequences, "F R U R' U' F'")
