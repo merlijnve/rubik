@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 type Cube struct {
@@ -51,18 +52,18 @@ func validate(seq string) {
 func test() {
 	test_sequences := make([]string, 0)
 
-	// test_sequences = append(test_sequences, "F")
-	// test_sequences = append(test_sequences, "B")
-	// test_sequences = append(test_sequences, "R")
-	// test_sequences = append(test_sequences, "L")
-	// test_sequences = append(test_sequences, "U")
-	// test_sequences = append(test_sequences, "D")
-	// test_sequences = append(test_sequences, "F2")
-	// test_sequences = append(test_sequences, "B2")
-	// test_sequences = append(test_sequences, "R2")
-	// test_sequences = append(test_sequences, "L2")
-	// test_sequences = append(test_sequences, "U2")
-	// test_sequences = append(test_sequences, "D2")
+	test_sequences = append(test_sequences, "F")
+	test_sequences = append(test_sequences, "B")
+	test_sequences = append(test_sequences, "R")
+	test_sequences = append(test_sequences, "L")
+	test_sequences = append(test_sequences, "U")
+	test_sequences = append(test_sequences, "D")
+	test_sequences = append(test_sequences, "F2")
+	test_sequences = append(test_sequences, "B2")
+	test_sequences = append(test_sequences, "R2")
+	test_sequences = append(test_sequences, "L2")
+	test_sequences = append(test_sequences, "U2")
+	test_sequences = append(test_sequences, "D2")
 	test_sequences = append(test_sequences, "R2 U D' L F2")
 	test_sequences = append(test_sequences, "R' F2 U2 L2 D2")
 	test_sequences = append(test_sequences, "U' L R2 F' U'")
@@ -91,50 +92,63 @@ func test() {
 	test_sequences = append(test_sequences, "U2 F' L2 F2 L2")
 
 	for i := range test_sequences {
+		start := time.Now()
 		cube := init_cube()
 		// print_cube_map(cube)
 		cube = sequence(cube, test_sequences[i])
 
 		// fmt.Println("DOING:", test_sequences[i])
 		// print_cube_map(cube)
+		starttime := time.Since(start).Seconds()
 		cube = astar(cube, bottom_cross_check, bottom_cross_heuristic, bottom_cross_get_moves)
-		fmt.Println("BOTTOM CROSS", len(cube.solution))
+		fmt.Println("BOTTOM CROSS", len(cube.solution), time.Since(start).Seconds()-starttime)
 		old_solution_lenght := len(cube.solution)
 		// print(len(cube.solution), " SOLUTION: ")
 		// print_cube_map(cube)
 		// print_solution(cube)
+		starttime = time.Since(start).Seconds()
 		cube = astar(cube, first_layer_check, first_layer_heuristic, first_layer_get_moves)
-		fmt.Println("FIRST LAYER", len(cube.solution)-old_solution_lenght)
+		fmt.Println("FIRST LAYER", len(cube.solution)-old_solution_lenght, time.Since(start).Seconds()-starttime)
 		old_solution_lenght = len(cube.solution)
 
 		// print(len(cube.solution), " SOLUTION: ")
 		// print_cube_map(cube)
 		// print_solution(cube)
+		starttime = time.Since(start).Seconds()
 		cube = astar(cube, second_layer_check, second_layer_heuristic, second_layer_get_moves)
-		fmt.Println("SECOND LAYER", len(cube.solution)-old_solution_lenght)
+		fmt.Println("SECOND LAYER", len(cube.solution)-old_solution_lenght, time.Since(start).Seconds()-starttime)
 		old_solution_lenght = len(cube.solution)
 
 		// print(len(cube.solution), " SOLUTION: ")
 		// print_cube_map(cube)
 		// print_solution(cube)
+		starttime = time.Since(start).Seconds()
 		cube = astar(cube, top_cross_check, top_cross_heuristic, top_cross_get_moves)
-		fmt.Println("TOP CROSS", len(cube.solution)-old_solution_lenght)
+		fmt.Println("TOP CROSS", len(cube.solution)-old_solution_lenght, time.Since(start).Seconds()-starttime)
 		old_solution_lenght = len(cube.solution)
 
 		// print(len(cube.solution), " SOLUTION: ")
 		// print_cube_map(cube)
 		// print_solution(cube)
+		starttime = time.Since(start).Seconds()
 		cube = astar(cube, top_layer_check, top_layer_heuristic, top_layer_get_moves)
-		fmt.Println("TOP LAYER", len(cube.solution)-old_solution_lenght)
+		fmt.Println("TOP LAYER", len(cube.solution)-old_solution_lenght, time.Since(start).Seconds()-starttime)
 		cube = optimize(cube)
 		// print_cube_map(cube)
+
+		duration := time.Since(start)
 
 		color := "\033[1;32m"
 		if len(cube.solution) > 150 {
 			color = "\033[1;31m"
 		}
-		fmt.Printf("%s%d%s", color, len(cube.solution), "\033[0m")
-		println()
+		fmt.Printf("%s%d%s\n", color, len(cube.solution), "\033[0m")
+		color = "\033[1;32m"
+		if duration.Seconds() > 3 {
+			color = "\033[1;31m"
+		}
+		fmt.Printf("%s%f%d%s\n", color, time.Since(start).Seconds(), len(cube.solution), "\033[0m")
+		println(i)
 		// print_solution(cube)
 	}
 }
