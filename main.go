@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"math/rand"
 	"os"
 	"strings"
 	"time"
@@ -49,9 +50,26 @@ func validate(seq string) {
 	}
 }
 
+func generate_test_sequence() string {
+
+	moves := []string{"U", "D", "R", "L", "F", "B", "U2", "D2", "R2", "L2", "F2", "B2", "U'", "D'", "R'", "L'", "F'", "B'"}
+	length := rand.Intn(100) + 1
+
+	move := moves[rand.Intn(len(moves))]
+
+	for i := 0; i < length; i++ {
+		move = move + " " + moves[rand.Intn(len(moves))]
+	}
+
+	return move
+}
+
 func test() {
 	test_sequences := make([]string, 0)
 
+	// test_sequences = append(test_sequences, "D B2 D2 B2 B B' F2 R")
+	// test_sequences = append(test_sequences, "B L' F2 F' F' R F2 R' F' L' B2 F F' B2 U' U2 U2 L' L' B U2 R2 B2 D D L'")
+	// test_sequences = append(test_sequences, "F U2 B F D' L2 U L' D2 R2")
 	//random test sequences
 	// test_sequences = append(test_sequences, "F")
 	// test_sequences = append(test_sequences, "B")
@@ -99,49 +117,57 @@ func test() {
 	// test_sequences = append(test_sequences, "F' U' L2 F2 L2 F2 R L2 D2 F2 R F R U' R' D2 ")
 	// test_sequences = append(test_sequences, "U R2 F B R B2 R U2 L B2 R U' D' R2 F R' L B2 U2 F2")
 	// test_sequences = append(test_sequences, "R' U2 B L' F U' B D F U D' L D2 F' R B' D F' U' B' U D'")
+	wrong := false
+	for i := 0; i < 1000; i++ {
+		test_sequences = append(test_sequences, generate_test_sequence())
+	}
 
 	for i := range test_sequences {
 		start := time.Now()
 		cube := init_cube()
-		// print_cube_map(cube)
 		cube = sequence(cube, test_sequences[i])
+		sequence_length := len(cube.solution)
+		cube.solution = nil
+		println(i, sequence_length)
+		println(test_sequences[i])
+		// print_cube_map(cube)
 
 		// fmt.Println("DOING:", test_sequences[i])
 		// print_cube_map(cube)
-		starttime := time.Since(start).Seconds()
+		// starttime := time.Since(start).Seconds()
 		cube = astar(cube, bottom_cross_check, bottom_cross_heuristic, bottom_cross_get_moves)
-		fmt.Println("BOTTOM CROSS", len(cube.solution), time.Since(start).Seconds()-starttime)
-		old_solution_lenght := len(cube.solution)
+		// fmt.Println("BOTTOM CROSS", len(cube.solution), time.Since(start).Seconds()-starttime)
+		// old_solution_lenght := len(cube.solution)
 		// print(len(cube.solution), " SOLUTION: ")
 		// print_cube_map(cube)
 		// print_solution(cube)
-		starttime = time.Since(start).Seconds()
+		// starttime = time.Since(start).Seconds()
 		cube = astar(cube, first_layer_check, first_layer_heuristic, first_layer_get_moves)
-		fmt.Println("FIRST LAYER", len(cube.solution)-old_solution_lenght, time.Since(start).Seconds()-starttime)
-		old_solution_lenght = len(cube.solution)
+		// fmt.Println("FIRST LAYER", len(cube.solution)-old_solution_lenght, time.Since(start).Seconds()-starttime)
+		// old_solution_lenght = len(cube.solution)
 
 		// print(len(cube.solution), " SOLUTION: ")
 		// print_cube_map(cube)
 		// print_solution(cube)
-		starttime = time.Since(start).Seconds()
+		// starttime = time.Since(start).Seconds()
 		cube = astar(cube, second_layer_check, second_layer_heuristic, second_layer_get_moves)
-		fmt.Println("SECOND LAYER", len(cube.solution)-old_solution_lenght, time.Since(start).Seconds()-starttime)
-		old_solution_lenght = len(cube.solution)
+		// fmt.Println("SECOND LAYER", len(cube.solution)-old_solution_lenght, time.Since(start).Seconds()-starttime)
+		// old_solution_lenght = len(cube.solution)
 
 		// print(len(cube.solution), " SOLUTION: ")
 		// print_cube_map(cube)
 		// print_solution(cube)
-		starttime = time.Since(start).Seconds()
+		// starttime = time.Since(start).Seconds()
 		cube = astar(cube, top_cross_check, top_cross_heuristic, top_cross_get_moves)
-		fmt.Println("TOP CROSS", len(cube.solution)-old_solution_lenght, time.Since(start).Seconds()-starttime)
-		old_solution_lenght = len(cube.solution)
+		// fmt.Println("TOP CROSS", len(cube.solution)-old_solution_lenght, time.Since(start).Seconds()-starttime)
+		// old_solution_lenght = len(cube.solution)
 
 		// print(len(cube.solution), " SOLUTION: ")
 		// print_cube_map(cube)
 		// print_solution(cube)
-		starttime = time.Since(start).Seconds()
+		// starttime = time.Since(start).Seconds()
 		cube = astar(cube, top_layer_check, top_layer_heuristic, top_layer_get_moves)
-		fmt.Println("TOP LAYER", len(cube.solution)-old_solution_lenght, time.Since(start).Seconds()-starttime)
+		// fmt.Println("TOP LAYER", len(cube.solution)-old_solution_lenght, time.Since(start).Seconds()-starttime)
 		cube = optimize(cube)
 		// print_cube_map(cube)
 
@@ -149,23 +175,27 @@ func test() {
 
 		color := "\033[1;32m"
 		if len(cube.solution) > 150 {
+			wrong = true
 			color = "\033[1;31m"
 		}
 		fmt.Printf("%s%d%s\n", color, len(cube.solution), "\033[0m")
 		color = "\033[1;32m"
 		if duration.Seconds() > 3 {
+			wrong = true
 			color = "\033[1;31m"
 		}
 		fmt.Printf("%s%f%d%s\n", color, time.Since(start).Seconds(), len(cube.solution), "\033[0m")
-		println(i)
+		println()
 		// print_solution(cube)
 	}
+	println(wrong)
 }
 
 func rubik(seq string) {
 	validate(seq)
 	cube := init_cube()
 	cube = sequence(cube, seq)
+	cube.solution = nil
 
 	fmt.Println("BOTTOM CROSS")
 	print_cube_map(cube)

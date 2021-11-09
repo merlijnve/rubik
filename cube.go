@@ -432,13 +432,15 @@ func print_cube_map(cube Cube) {
 	}
 	for row := 0; row < 3; row++ {
 		for col := 0; col < 3; col++ {
-			fmt.Printf("     ")
+			fmt.Printf("   ")
 		}
+		fmt.Print(" ")
 		for col := 0; col < 3; col++ {
-			fmt.Printf("%s [%s] %s", colors[cube.pattern[row*3+col]], cube.pattern[row*3+col], colors["C"])
+			fmt.Printf("%s[%s]%s", colors[cube.pattern[row*3+col]], cube.pattern[row*3+col], colors["C"])
 		}
 		fmt.Println()
 	}
+	fmt.Println()
 	for row := 0; row < 3; row++ {
 		//[4, 2, 1, 5]
 		faces := map[int]int{
@@ -450,17 +452,20 @@ func print_cube_map(cube Cube) {
 		for index := 0; index <= 3; index++ {
 			face := faces[index]
 			for col := 0; col < 3; col++ {
-				fmt.Printf("%s [%s] %s", colors[cube.pattern[face*3*3+row*3+col]], cube.pattern[face*3*3+row*3+col], colors["C"])
+				fmt.Printf("%s[%s]%s", colors[cube.pattern[face*3*3+row*3+col]], cube.pattern[face*3*3+row*3+col], colors["C"])
 			}
+			fmt.Print(" ")
 		}
 		fmt.Println()
 	}
+	fmt.Println()
 	for row := 0; row < 3; row++ {
 		for col := 0; col < 3; col++ {
-			fmt.Printf("     ")
+			fmt.Printf("   ")
 		}
+		fmt.Print(" ")
 		for col := 0; col < 3; col++ {
-			fmt.Printf("%s [%s] %s", colors[cube.pattern[9*3+row*3+col]], cube.pattern[9*3+row*3+col], colors["C"])
+			fmt.Printf("%s[%s]%s", colors[cube.pattern[9*3+row*3+col]], cube.pattern[9*3+row*3+col], colors["C"])
 		}
 		fmt.Println()
 	}

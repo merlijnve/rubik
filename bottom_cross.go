@@ -14,7 +14,7 @@ func bottom_cross_heuristic(cube Cube) int {
 			value += 1
 		}
 	}
-	return value
+	return value * 2
 }
 
 func bottom_cross_get_moves(cube Cube) []Cube {
