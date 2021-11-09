@@ -96,9 +96,3 @@ func first_layer_check(cube Cube) bool {
 	}
 	return true
 }
-
-// func first_layer(cube Cube) Cube {
-// 	get_moves(cube)
-// 	first_layer_heuristic(cube)
-// 	return cube
-// }
