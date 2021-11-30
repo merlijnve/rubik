@@ -1,4 +1,5 @@
-# rubik_go
+# rubik
+Rubik's cube solver in Go(lang)
 
 Implementation of A* for each layer of Beginner CFOP/Fridrich
 
